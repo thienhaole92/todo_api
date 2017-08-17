@@ -18,12 +18,19 @@ var DATABASE_URI = CONFIG.database.uri;
 
 var uri = process.env.MONGOLAB_URI || DATABASE_URI;
 console.log(uri);
-mongoose.connect(uri, {}, function (err, db) {
-    if (err) {
-        console.log('Connection Error ::: ', err);
-    } else {
-        console.log('Successfully Connected!');
-    }
+// mongoose.connect(uri, {}, function (err, db) {
+//     if (err) {
+//         console.log('Connection Error ::: ', err);
+//     } else {
+//         console.log('Successfully Connected!');
+//     }
+// });
+
+mongoose.connect(uri, options);
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function callback () {
+    console.log('Successfully Connected!');
 });
 
 var job = schedule.scheduleJob('00 23 * * *', function(){
