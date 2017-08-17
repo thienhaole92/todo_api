@@ -5,12 +5,13 @@ var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
+var schedule = require('node-schedule');
 var successedMiddleware = require('./app/middleware/successed');
 var failureMiddleware = require('./app/middleware/failure');
 var app = express();
 
 var CONFIG = require('./app/config/config.json');
-var PORT = parseInt(CONFIG.server.port, 10);
+var PORT = process.env.PORT || parseInt(CONFIG.server.port, 10);
 var HOST_NAME = CONFIG.server.hostName;
 var DATABASE_NAME = CONFIG.database.name;
 var DATABASE_URI = CONFIG.database.uri;
@@ -22,6 +23,12 @@ mongoose.connect(uri, {}, function (err, db) {
     } else {
         console.log('Successfully Connected!');
     }
+});
+
+
+
+var job = schedule.scheduleJob('00 23 * * *', function(){
+  console.log('The answer to life, the universe, and everything!');
 });
 
 //Middlewares

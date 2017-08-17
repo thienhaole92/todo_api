@@ -35,6 +35,5 @@ function createNotification(user, message, cb) {
 }
 
 module.exports = {
-    createNotification: createNotification,
-
+    createNotification: createNotification
 };
