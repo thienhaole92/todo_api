@@ -1,0 +1,14 @@
+{
+    "server": {
+        "hostName": "localhost",
+        "port": "8888"
+    },
+    "token": {
+        "secret": "secretapplication",
+        "expiresInSeconds": "36000"
+    },
+    "database": {
+        "name": "todo-app",
+        "uri": "mongodb://localhost:27017/todo-app-api"
+    }
+}

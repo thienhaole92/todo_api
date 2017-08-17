@@ -1,0 +1,6 @@
+{
+    "createUser": "/",
+    "authenticate": "/authenticate",
+    "createTask": "/",
+    "completeTask": "/complete"
+}
