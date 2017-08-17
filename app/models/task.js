@@ -28,7 +28,11 @@ var schema = new Schema({
     completed: {
         type: Boolean,
         default: false
-    }
+    },
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
 });
 
 module.exports = mongoose.model('Task', schema, 'tasks');

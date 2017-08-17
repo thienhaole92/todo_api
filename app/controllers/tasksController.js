@@ -30,7 +30,8 @@ function createTask(req, res, next) {
                 completeDate: completeDate,
                 priority: priority,
                 saveAsAlarm: saveAsAlarm,
-                showAsNotification: showAsNotification
+                showAsNotification: showAsNotification,
+                userId: user._id
             });
             task.save(function (err) {
                 if (err) {
@@ -64,6 +65,12 @@ function completeTask(req, res, next) {
             next(err);
             return;
         }
+        if (!task) {
+            next({
+                message: 'Can not find task with id ' + taskId
+            });
+            return;
+        }
         if (task.completed) {
             next({
                 message: 'You completed this task'
@@ -92,8 +99,9 @@ function completeTask(req, res, next) {
                         next(err);
                         return;
                     } else {
+                        checkTodayTask(user);
                         res.data = {
-                            tasks: user.tasks
+                            task: task
                         };
                         next();
                     }
@@ -110,6 +118,32 @@ function checkCompletedAllTasks(tasks, cb) {
         }
     }
     cb(true);
+}
+
+function checkTodayTask(user) {
+    var start = new Date();
+    start.setHours(0, 0, 0, 0);
+    var end = new Date();
+    end.setHours(23, 59, 59, 999);
+    var completeDateCondition = {
+        $gte: start,
+        $lt: end
+    }
+    Task.find({
+        $and: [{
+                completeDate: completeDateCondition
+            },
+            {
+                userId: user._id
+            }
+        ]
+    }, function (err, tasks) {
+        if (err) {
+
+        } else {
+
+        }
+    });
 }
 
 module.exports = {
