@@ -28,6 +28,9 @@ console.log(uri);
 
 mongoose.connect(uri, options);
 var db = mongoose.connection;
+var options = { server: { socketOptions: { keepAlive: 300000, connectTimeoutMS: 30000 } },
+                replset: { socketOptions: { keepAlive: 300000, connectTimeoutMS : 30000 } }
+                };
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback () {
     console.log('Successfully Connected!');
