@@ -94,7 +94,8 @@ function completeTask(req, res, next) {
                     next(err);
                     return;
                 }
-                notificationsController.createCompletedNotification(user, function (notification, err) {
+                var message = 'Hooray! You have completed the task';
+                notificationsController.createNotification(user, message, function (notification, err) {
                     if (err) {
                         next(err);
                         return;
@@ -145,7 +146,8 @@ function checkTodayTask(user) {
             if(tasks.length > 0) {
                 checkCompletedAllTasks(tasks, function(isDone){
                     if (isDone){
-                        notificationsController.createCompletedAllTodayTasksNotification(user, function (notification, err) {
+                        var message = 'Hooray! You have completed all the task for today';
+                        notificationsController.createNotification(user, message, function (notification, err) {
                             if (err) {
                                 console.log(err);
                             } else {

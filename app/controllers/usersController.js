@@ -34,7 +34,7 @@ function createUser(req, res, next) {
                     next(err);
                     return;
                 } else {
-                    var token = tokenMiddleware.sign(user);
+                    var token = tokenMiddleware.sign(savedUser);
                     res.data = {
                         user: {
                             id: savedUser._id,
