@@ -139,9 +139,21 @@ function checkTodayTask(user) {
         ]
     }, function (err, tasks) {
         if (err) {
-
+            console.log(err);
         } else {
-
+            if(tasks.length > 0) {
+                checkCompletedAllTasks(tasks, function(isDone){
+                    if (isDone){
+                        notificationsController.createCompletedAllTodayTasksNotification(user, function (notification, err) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                console.log(notification);
+                            }
+                        });
+                    }
+                });
+            }
         }
     });
 }
