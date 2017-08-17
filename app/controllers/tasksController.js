@@ -111,6 +111,7 @@ function completeTask(req, res, next) {
 }
 
 function checkCompletedAllTasks(tasks, cb) {
+    var task;
     for (task in tasks) {
         if (task.completed == false) {
             cb(false);
