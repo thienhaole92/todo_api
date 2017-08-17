@@ -17,6 +17,7 @@ var DATABASE_NAME = CONFIG.database.name;
 var DATABASE_URI = CONFIG.database.uri;
 
 var uri = process.env.MONGOLAB_URI || DATABASE_URI;
+console.log(uri);
 mongoose.connect(uri, {}, function (err, db) {
     if (err) {
         console.log('Connection Error ::: ', err);
@@ -24,8 +25,6 @@ mongoose.connect(uri, {}, function (err, db) {
         console.log('Successfully Connected!');
     }
 });
-
-
 
 var job = schedule.scheduleJob('00 23 * * *', function(){
   console.log('The answer to life, the universe, and everything!');
