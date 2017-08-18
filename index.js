@@ -15,37 +15,36 @@ var PORT = process.env.PORT || parseInt(CONFIG.server.port, 10);
 var HOST_NAME = CONFIG.server.hostName;
 var DATABASE_URI = CONFIG.database.uri;
 
-// var uri = process.env.MONGOLAB_URI || DATABASE_URI;
-var uri = 'mongodb://thienhaole92:Thienhao92@ds149743.mlab.com:49743/todoappdb'
+var uri = process.env.MONGOLAB_URI || DATABASE_URI;
 console.log(uri);
-// mongoose.connect(uri, {
-//     authMechanism: 'ScramSHA1'
-// }, function (err, db) {
-//     if (err) {
-//         console.log('Connection Error ::: ', err);
-//     } else {
-//         console.log('Successfully Connected!');
-//     }
-// });
-
-const db = mongoose.connect(uri, {
-    server: {
-        socketOptions: {
-            keepAlive: 1
-        }
-    }
-}).connection;
-
-db.on('error', (err) => {
-    console.log(err);
-});
-db.once('open', (err) => {
+mongoose.connect(uri, {
+    authMechanism: 'ScramSHA1'
+}, function (err, db) {
     if (err) {
-        console.log(err);
+        console.log('Connection Error ::: ', err);
     } else {
         console.log('Successfully Connected!');
     }
 });
+
+// const db = mongoose.connect(uri, {
+//     server: {
+//         socketOptions: {
+//             keepAlive: 1
+//         }
+//     }
+// }).connection;
+
+// db.on('error', (err) => {
+//     console.log(err);
+// });
+// db.once('open', (err) => {
+//     if (err) {
+//         console.log(err);
+//     } else {
+//         console.log('Successfully Connected!');
+//     }
+// });
 
 var job = schedule.scheduleJob('00 23 * * *', function () {
     console.log('The answer to life, the universe, and everything!');
