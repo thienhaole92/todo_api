@@ -17,11 +17,30 @@ var DATABASE_URI = CONFIG.database.uri;
 
 var uri = process.env.MONGOLAB_URI || DATABASE_URI;
 console.log(uri);
-mongoose.connect(uri, {
-    authMechanism: 'ScramSHA1'
-}, function (err, db) {
+// mongoose.connect(uri, {
+//     authMechanism: 'ScramSHA1'
+// }, function (err, db) {
+//     if (err) {
+//         console.log('Connection Error ::: ', err);
+//     } else {
+//         console.log('Successfully Connected!');
+//     }
+// });
+
+const db = mongoose.connect(config.db.uri, {
+    server: {
+        socketOptions: {
+            keepAlive: 1
+        }
+    }
+}).connection;
+
+db.on('error', (err) => {
+    console.log(err);
+});
+db.once('open', (err) => {
     if (err) {
-        console.log('Connection Error ::: ', err);
+        console.log(err);
     } else {
         console.log('Successfully Connected!');
     }
