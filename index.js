@@ -13,7 +13,6 @@ var app = express();
 var CONFIG = require('./app/config/config.json');
 var PORT = process.env.PORT || parseInt(CONFIG.server.port, 10);
 var HOST_NAME = CONFIG.server.hostName;
-var DATABASE_NAME = CONFIG.database.name;
 var DATABASE_URI = CONFIG.database.uri;
 
 var uri = process.env.MONGOLAB_URI || DATABASE_URI;
