@@ -18,23 +18,13 @@ var DATABASE_URI = CONFIG.database.uri;
 
 var uri = process.env.MONGOLAB_URI || DATABASE_URI;
 console.log(uri);
-// mongoose.connect(uri, {}, function (err, db) {
-//     if (err) {
-//         console.log('Connection Error ::: ', err);
-//     } else {
-//         console.log('Successfully Connected!');
-//     }
-// });
-
-var MongoClient = require('mongodb').MongoClient,
-    assert = require('assert');
-// Use connect method to connect to the Server 
-MongoClient.connect(uri, function (err, db) {
-    assert.equal(null, err);
-    console.log("Connected correctly to server");
-    db.close();
+mongoose.connect(uri, {}, function (err, db) {
+    if (err) {
+        console.log('Connection Error ::: ', err);
+    } else {
+        console.log('Successfully Connected!');
+    }
 });
-
 
 var job = schedule.scheduleJob('00 23 * * *', function () {
     console.log('The answer to life, the universe, and everything!');
