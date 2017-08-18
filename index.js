@@ -27,7 +27,7 @@ console.log(uri);
 //     }
 // });
 
-const db = mongoose.connect(config.db.uri, {
+const db = mongoose.connect(uri, {
     server: {
         socketOptions: {
             keepAlive: 1
