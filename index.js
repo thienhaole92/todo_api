@@ -17,7 +17,9 @@ var DATABASE_URI = CONFIG.database.uri;
 
 var uri = process.env.MONGOLAB_URI || DATABASE_URI;
 console.log(uri);
-mongoose.connect(uri, {}, function (err, db) {
+mongoose.connect(uri, {
+    authMechanism: 'ScramSHA1'
+}, function (err, db) {
     if (err) {
         console.log('Connection Error ::: ', err);
     } else {
