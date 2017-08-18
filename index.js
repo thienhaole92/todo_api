@@ -16,7 +16,7 @@ var HOST_NAME = CONFIG.server.hostName;
 var DATABASE_URI = CONFIG.database.uri;
 
 // var uri = process.env.MONGOLAB_URI || DATABASE_URI;
-var uri = 'mongodb://thienhaole92:Thienhao92@ds139362.mlab.com:39362/benhvien'
+var uri = 'mongodb://thienhaole92:Thienhao92@@ds149743.mlab.com:49743/todoappdb'
 console.log(uri);
 // mongoose.connect(uri, {
 //     authMechanism: 'ScramSHA1'
